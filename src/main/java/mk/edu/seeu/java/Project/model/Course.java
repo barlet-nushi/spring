@@ -15,7 +15,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-public class Course{
+public class Course  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,9 +24,8 @@ public class Course{
     @Column(nullable = false, unique = true)
     private String cname;
 
-
+    @JsonBackReference
     @ManyToMany(mappedBy = "course",fetch = FetchType.LAZY)
-    @JsonIgnoreProperties("course")
     public List<Student> students;
 
 
@@ -37,15 +36,8 @@ public class Course{
     public Course(){
     }
 
-    public Course(String cname) {
-
+    public Course(final String cname) {
         this.cname = cname;
-    }
-
-    public Course(String cname, List<Student> students, List<Teacher> teacher) {
-        this.cname = cname;
-        this.students = students;
-        this.teacher = teacher;
     }
 
     public Long getCid() {

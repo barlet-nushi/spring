@@ -25,7 +25,7 @@ public class Student{
     private String sname;
 
 
-
+    @JsonManagedReference
     @ManyToMany(cascade = {
             CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
     })
@@ -33,19 +33,13 @@ public class Student{
             name = "register",
             joinColumns = @JoinColumn(name = "sid"),
             inverseJoinColumns = @JoinColumn(name = "cid"))
-    @JsonIgnoreProperties("students")
-    public List<Course> course;
+    private List<Course> course;
 
     public Student(){
     }
 
     public Student(String sname) {
         this.sname = sname;
-    }
-
-    public Student(String sname, List<Course> course) {
-        this.sname = sname;
-        this.course = course;
     }
 
     public Long getSid() {
@@ -84,4 +78,5 @@ public class Student{
     public int hashCode() {
         return Objects.hash(31);
     }
+
 }
