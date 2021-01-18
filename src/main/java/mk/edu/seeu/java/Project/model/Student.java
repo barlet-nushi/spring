@@ -25,7 +25,7 @@ public class Student{
     private String sname;
 
 
-    @JsonManagedReference
+    @JsonIgnore
     @ManyToMany(cascade = {
             CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
     })

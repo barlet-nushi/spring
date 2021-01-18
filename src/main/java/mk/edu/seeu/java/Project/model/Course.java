@@ -24,7 +24,7 @@ public class Course  {
     @Column(nullable = false, unique = true)
     private String cname;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToMany(mappedBy = "course",fetch = FetchType.LAZY)
     public List<Student> students;
 
