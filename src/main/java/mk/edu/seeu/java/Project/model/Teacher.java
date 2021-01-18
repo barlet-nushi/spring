@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -38,11 +39,11 @@ public class Teacher {
         this.course = course;
     }
 
-    public long getTid() {
+    public Long getTid() {
         return tid;
     }
 
-    public void setTid(long tid) {
+    public void setTid(Long tid) {
         this.tid = tid;
     }
 
@@ -60,5 +61,18 @@ public class Teacher {
 
     public void setCourse(Course course) {
         this.course = course;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Teacher)) return false;
+        Teacher teacher = (Teacher) o;
+        return getTid().equals(teacher.getTid());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(31);
     }
 }

@@ -1,4 +1,4 @@
-package mk.edu.seeu.java.Project.Repositories;
+package mk.edu.seeu.java.Project.repositories;
 
 import mk.edu.seeu.java.Project.model.Teacher;
 import org.springframework.data.repository.CrudRepository;

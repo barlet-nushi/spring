@@ -1,4 +1,4 @@
-package mk.edu.seeu.java.Project.Controller.Exception;
+package mk.edu.seeu.java.Project.controller.exception;
 
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -11,15 +11,15 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
-public class TeacherExceptionHandler extends ResponseEntityExceptionHandler {
+public class CourseExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler({ TeacherNotFoundException.class })
+    @ExceptionHandler({ CourseNotFoundException.class })
     protected ResponseEntity<Object> handleNotFound(Exception ex, WebRequest request) {
         return handleExceptionInternal(ex, ex.getMessage(),
             new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
 
-    @ExceptionHandler({ TeacherIdMismatchException.class,
+    @ExceptionHandler({ CourseIdMismatchException.class,
         ConstraintViolationException.class,
         DataIntegrityViolationException.class })
     public ResponseEntity<Object> handleBadRequest(

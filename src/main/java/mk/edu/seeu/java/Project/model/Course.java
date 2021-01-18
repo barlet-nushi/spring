@@ -11,6 +11,7 @@ import java.awt.print.Book;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -78,5 +79,18 @@ public class Course{
 
     public void setStudents(List<Student> students) {
         this.students = students;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Course)) return false;
+        Course course = (Course) o;
+        return getCid().equals(course.getCid());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(31);
     }
 }

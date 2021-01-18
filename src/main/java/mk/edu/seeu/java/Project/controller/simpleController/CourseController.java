@@ -1,6 +1,6 @@
-package mk.edu.seeu.java.Project.Controller.SimpleController;
+package mk.edu.seeu.java.Project.controller.simpleController;
 
-import mk.edu.seeu.java.Project.Repositories.CourseRepo;
+import mk.edu.seeu.java.Project.repositories.CourseRepo;
 import mk.edu.seeu.java.Project.model.Course;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

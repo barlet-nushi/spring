@@ -1,4 +1,4 @@
-package mk.edu.seeu.java.Project.Configurations;
+package mk.edu.seeu.java.Project.configurations;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

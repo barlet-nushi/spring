@@ -1,4 +1,4 @@
-package mk.edu.seeu.java.Project.Controller.Exception;
+package mk.edu.seeu.java.Project.controller.exception;
 
 public class TeacherIdMismatchException extends RuntimeException {
 

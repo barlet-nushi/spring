@@ -1,6 +1,6 @@
-package mk.edu.seeu.java.Project.Controller.SimpleController;
+package mk.edu.seeu.java.Project.controller.simpleController;
 
-import mk.edu.seeu.java.Project.Repositories.StudentRepo;
+import mk.edu.seeu.java.Project.repositories.StudentRepo;
 import mk.edu.seeu.java.Project.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -51,8 +51,11 @@ public class StudentController {
         if (result.hasErrors()) {
             return "update";
         }
+        var foundStudent = studentRepo.findById(sid)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid student Id:" + sid));
+        foundStudent.setSname(student.getSname());
 
-        studentRepo.save(student);
+        studentRepo.save(foundStudent);
         return "redirect:/index";
     }
 

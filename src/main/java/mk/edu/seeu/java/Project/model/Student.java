@@ -10,6 +10,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -25,7 +26,9 @@ public class Student{
 
 
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(cascade = {
+            CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
+    })
     @JoinTable(
             name = "register",
             joinColumns = @JoinColumn(name = "sid"),
@@ -67,5 +70,18 @@ public class Student{
 
     public void setCourse(List<Course> course) {
         this.course = course;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Student)) return false;
+        Student student = (Student) o;
+        return getSid().equals(student.getSid());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(31);
     }
 }

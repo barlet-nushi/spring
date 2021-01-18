@@ -1,15 +1,14 @@
-package mk.edu.seeu.java.Project.Controller.Rest;
+package mk.edu.seeu.java.Project.controller.rest;
 
 
 
-import mk.edu.seeu.java.Project.Controller.Exception.StudentNotFoundException;
-import mk.edu.seeu.java.Project.Repositories.StudentRepo;
+import mk.edu.seeu.java.Project.controller.exception.StudentIdMismatchException;
+import mk.edu.seeu.java.Project.controller.exception.StudentNotFoundException;
+import mk.edu.seeu.java.Project.repositories.StudentRepo;
 import mk.edu.seeu.java.Project.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/rest/student")
@@ -46,16 +45,16 @@ public class RestStudentController {
     public Student createStudent(@RequestBody Student student) {
             return studentRepo.save(student);
     }
-//
-//    @PutMapping("/update/{id}")
-//    public Student updateStudent(@RequestBody Student student, @PathVariable long sid) {
-//        if (student.getSid() != sid) {
-//            throw new StudentIdMismatchException("The id did not match", null);
-//        }
-//        studentRepo.findById(sid)
-//                .orElseGet(() -> {
-//                    throw new StudentNotFoundException("Student not found", null);
-//                });
-//        return studentRepo.save(student);
-//    }
+
+    @PutMapping("/{id}")
+    public Student updateStudent(@RequestBody Student student, @PathVariable long id) {
+        if (student.getSid() != id) {
+            throw new StudentIdMismatchException("The id did not match", null);
+        }
+        studentRepo.findById(id)
+                .orElseGet(() -> {
+                    throw new StudentNotFoundException("Student not found", null);
+                });
+        return studentRepo.save(student);
+    }
 }
