@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring</title>
+</head>
+<body>
+<form action="#" th:action="@{/addstudent}" th:object="${student}" method="post">
+
+
+    <label for="name">Name: </label>
+    <input type="text" th:field="*{sname}" id="name" placeholder="Student Name">
+    <span th:if="${#fields.hasErrors('sname')}" th:errors="*{sname}"></span>
+
+    <input type="submit" value="Add Student">
+</form>
+</body>
+</html>

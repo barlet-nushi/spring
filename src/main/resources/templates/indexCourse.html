@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Courses</title>
+</head>
+<body>
+<div th:switch="${courses}">
+    <h2 th:case="null">No Subjects yet!</h2>
+    <div th:case="*">
+        <h2>Courses</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Course Id</th>
+                <th>Course Name</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="course : ${courses}">
+                <td th:text="${course.cid}"></td>
+                <td th:text="${course.cname}"></td>
+                <td><a th:href="@{/course/edit/{id}(id=${course.cid})}">Edit</a></td>
+                <td><a th:href="@{/course/delete/{id}(id=${course.cid})}">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p><a href="/course">Add a new Course</a></p>
+</div>
+
+</body>
+</html>

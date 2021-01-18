@@ -1,0 +1,71 @@
+package mk.edu.seeu.java.Project.model;
+
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+@Entity
+public class Student{
+
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long sid;
+
+    @Column(nullable = false)
+    private String sname;
+
+
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "register",
+            joinColumns = @JoinColumn(name = "sid"),
+            inverseJoinColumns = @JoinColumn(name = "cid"))
+    @JsonIgnoreProperties("students")
+    public List<Course> course;
+
+    public Student(){
+    }
+
+    public Student(String sname) {
+        this.sname = sname;
+    }
+
+    public Student(String sname, List<Course> course) {
+        this.sname = sname;
+        this.course = course;
+    }
+
+    public Long getSid() {
+        return sid;
+    }
+
+    public void setSid(Long sid) {
+        this.sid = sid;
+    }
+
+    public String getSname() {
+        return sname;
+    }
+
+    public void setSname(String sname) {
+        this.sname = sname;
+    }
+
+    public List<Course> getCourse() {
+        return course;
+    }
+
+    public void setCourse(List<Course> course) {
+        this.course = course;
+    }
+}

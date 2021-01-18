@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="#" th:action="@{/course/update/{id}(id=${courses.cid})}" th:object="${courses}" method="post">
+
+    <label for="name">Course Name</label>
+    <input type="text" th:field="*{cname}" id="name" placeholder="Course Name">
+
+    <input type="hidden" th:field="*{cid}" th:value="*{cid}">
+
+    <input type="submit" value="Update Course">
+</form>
+</body>
+</html>

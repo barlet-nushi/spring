@@ -1,0 +1,82 @@
+package mk.edu.seeu.java.Project.model;
+
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.*;
+import java.awt.print.Book;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+@Entity
+public class Course{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long cid;
+
+    @Column(nullable = false, unique = true)
+    private String cname;
+
+
+    @ManyToMany(mappedBy = "course",fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("course")
+    public List<Student> students;
+
+
+    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
+    public List<Teacher> teacher;
+
+
+    public Course(){
+    }
+
+    public Course(String cname) {
+
+        this.cname = cname;
+    }
+
+    public Course(String cname, List<Student> students, List<Teacher> teacher) {
+        this.cname = cname;
+        this.students = students;
+        this.teacher = teacher;
+    }
+
+    public Long getCid() {
+        return cid;
+    }
+
+    public void setCid(Long cid) {
+        this.cid = cid;
+    }
+
+    public String getCname() {
+        return cname;
+    }
+
+    public void setCname(String cname) {
+        this.cname = cname;
+    }
+
+
+    public List<Teacher> getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(List<Teacher> teacher) {
+        this.teacher = teacher;
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
+}
