@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 @RepositoryRestResource(path = "teachers", collectionResourceRel = "teachers")
 public interface TeacherRepo extends PagingAndSortingRepository<Teacher,Long> {
 
+
 }

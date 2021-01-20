@@ -9,10 +9,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.*;
 import java.awt.print.Book;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class Course  {
@@ -24,13 +21,13 @@ public class Course  {
     @Column(nullable = false, unique = true)
     private String cname;
 
-    @JsonIgnore
-    @ManyToMany(mappedBy = "course",fetch = FetchType.LAZY)
-    public List<Student> students;
+    @JsonBackReference
+    @ManyToMany(mappedBy = "course",fetch = FetchType.EAGER)
+    private Set<Student> students = new HashSet<>();
 
-
-    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
-    public List<Teacher> teacher;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "course", fetch = FetchType.EAGER)
+    private Set<Teacher> teacher = new HashSet<>();
 
 
     public Course(){
@@ -38,6 +35,11 @@ public class Course  {
 
     public Course(final String cname) {
         this.cname = cname;
+    }
+
+    public Course(String cname, Set<Student> students) {
+        this.cname = cname;
+        this.students = students;
     }
 
     public Long getCid() {
@@ -57,19 +59,19 @@ public class Course  {
     }
 
 
-    public List<Teacher> getTeacher() {
+    public Set<Teacher> getTeacher() {
         return teacher;
     }
 
-    public void setTeacher(List<Teacher> teacher) {
+    public void setTeacher(Set<Teacher> teacher) {
         this.teacher = teacher;
     }
 
-    public List<Student> getStudents() {
+    public Set<Student> getStudents() {
         return students;
     }
 
-    public void setStudents(List<Student> students) {
+    public void setStudents(Set<Student> students) {
         this.students = students;
     }
 

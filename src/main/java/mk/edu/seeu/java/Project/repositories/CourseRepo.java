@@ -11,5 +11,4 @@ import java.util.List;
 @RepositoryRestResource(path = "courses", collectionResourceRel = "courses")
 public interface CourseRepo extends PagingAndSortingRepository<Course,Long> {
 
-
 }

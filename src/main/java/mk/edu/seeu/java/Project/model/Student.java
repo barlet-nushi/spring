@@ -8,10 +8,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class Student{
@@ -25,7 +22,6 @@ public class Student{
     private String sname;
 
 
-    @JsonIgnore
     @ManyToMany(cascade = {
             CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
     })
@@ -33,7 +29,9 @@ public class Student{
             name = "register",
             joinColumns = @JoinColumn(name = "sid"),
             inverseJoinColumns = @JoinColumn(name = "cid"))
-    private List<Course> course;
+
+    @JsonManagedReference
+    private Set<Course> course = new HashSet<>();
 
     public Student(){
     }
@@ -58,11 +56,11 @@ public class Student{
         this.sname = sname;
     }
 
-    public List<Course> getCourse() {
+    public Set<Course> getCourse() {
         return course;
     }
 
-    public void setCourse(List<Course> course) {
+    public void setCourse(Set<Course> course) {
         this.course = course;
     }
 

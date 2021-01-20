@@ -1,6 +1,7 @@
 package mk.edu.seeu.java.Project.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.data.domain.Page;
 
 import javax.persistence.*;
@@ -19,8 +20,9 @@ public class Teacher {
     private String tname;
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "cid")
+    @JsonBackReference
     public Course course;
 
 
@@ -28,8 +30,7 @@ public class Teacher {
 
     }
 
-    public Teacher(Long tid, String tname) {
-        this.tid = tid;
+    public Teacher(String tname) {
         this.tname = tname;
     }
 
