@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
-import java.awt.print.Book;
 import java.io.Serializable;
 import java.util.*;
 
@@ -21,12 +20,14 @@ public class Course  {
     @Column(nullable = false, unique = true)
     private String cname;
 
-    @JsonBackReference
+
     @ManyToMany(mappedBy = "course",fetch = FetchType.EAGER)
+    @JsonIgnoreProperties("course")
     private Set<Student> students = new HashSet<>();
 
-    @JsonManagedReference
+
     @OneToMany(mappedBy = "course", fetch = FetchType.EAGER)
+    @JsonIgnoreProperties("course")
     private Set<Teacher> teacher = new HashSet<>();
 
 

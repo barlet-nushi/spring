@@ -12,6 +12,16 @@
     <input type="text" th:field="*{sname}" id="name" placeholder="Student Name">
     <span th:if="${#fields.hasErrors('sname')}" th:errors="*{sname}"></span>
 
+    <br>
+    <br>
+
+    <select  th:field="*{course}" multiple="multiple">
+        <option th:each="course: ${courses}" th:value="${course.cid}" th:text="${course.cname}" />
+    </select>
+
+    <br>
+    <br>
+
     <input type="submit" value="Add Student">
 </form>
 </body>

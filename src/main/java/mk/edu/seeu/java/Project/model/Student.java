@@ -29,8 +29,7 @@ public class Student{
             name = "register",
             joinColumns = @JoinColumn(name = "sid"),
             inverseJoinColumns = @JoinColumn(name = "cid"))
-
-    @JsonManagedReference
+    @JsonIgnoreProperties("students")
     private Set<Course> course = new HashSet<>();
 
     public Student(){

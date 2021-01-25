@@ -1,5 +1,6 @@
 package mk.edu.seeu.java.Project.controller.simpleController;
 
+import mk.edu.seeu.java.Project.repositories.CourseRepo;
 import mk.edu.seeu.java.Project.repositories.TeacherRepo;
 import mk.edu.seeu.java.Project.model.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,12 @@ public class TeacherController {
     @Autowired
     private TeacherRepo teacherRepo;
 
+    @Autowired
+    private CourseRepo courseRepo;
+
     @GetMapping("/teacher")
-    public String showBaseForm(Teacher teacher) {
+    public String showBaseForm(Teacher teacher,Model model) {
+        model.addAttribute("courses",courseRepo.findAll());
         return "addTeacher";
     }
 

@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/rest/student")
@@ -31,12 +32,17 @@ public class RestStudentController {
     }
 
 
-    @GetMapping("/{id}")
+    @GetMapping("/find/{id}")
     public Student findOne(@PathVariable long id) {
         return studentRepo.findById(id)
                 .orElseGet(() -> {
                     throw new StudentNotFoundException("Student not found", null);
                 });
+    }
+
+    @GetMapping("/{name}")
+    public Set<Student> findBySname(@PathVariable String name) {
+        return studentRepo.findBySname(name);
     }
 
 

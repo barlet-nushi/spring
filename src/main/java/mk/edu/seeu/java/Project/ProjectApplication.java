@@ -36,26 +36,32 @@ public class ProjectApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 		Student student = new Student("Barlet");
+        Student student1 = new Student("Setki");
 
 		studentRepo.save(student);
+        studentRepo.save(student1);
 
 		Course course1 = new Course("Calculus");
 		Course course2 = new Course("Database");
+        Course course3 = new Course("Java");
 
-		courseRepo.saveAll(Arrays.asList(course1,course2));
+		courseRepo.saveAll(Arrays.asList(course1,course2,course3));
 
 		student.getCourse().addAll(Arrays.asList(course1,course2));
+        student1.getCourse().addAll(Arrays.asList(course1,course3));
 
 		studentRepo.save(student);
+		studentRepo.save(student1);
 
 		Teacher teacher = new Teacher("John");
 		Teacher teacher1 = new Teacher("Joe");
+        Teacher teacher2 = new Teacher("Habib");
 
 		teacher.setCourse(course1);
 		teacher1.setCourse(course2);
+		teacher2.setCourse(course3);
 
-		teacherRepo.save(teacher);
-		teacherRepo.save(teacher1);
 
+		teacherRepo.saveAll(Arrays.asList(teacher,teacher1,teacher2));
 	}
 }

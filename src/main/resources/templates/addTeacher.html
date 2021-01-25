@@ -11,6 +11,10 @@
     <input type="text" th:field="*{tname}" id="name" placeholder="Teacher Name">
     <span th:if="${#fields.hasErrors('tname')}" th:errors="*{tname}"></span>
 
+    <select  th:field="*{course}" >
+        <option th:each="course: ${courses}" th:value="${course.cid}" th:text="${course.cname}" />
+    </select>
+
     <input type="submit" value="Add Teacher">
 </form>
 </body>

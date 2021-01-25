@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Set;
+
 @RestController
 @RequestMapping("/rest/course")
 public class RestCourseController {
@@ -32,6 +34,12 @@ public class RestCourseController {
                     throw new CourseNotFoundException("Course Not Found", null);
                 });
     }
+
+    @GetMapping("/find/{name}")
+    public Set<Course> findByCname(@PathVariable String name) {
+        return courseRepo.findByCname(name);
+    }
+
 
 
     @DeleteMapping("/delete/{id}")
